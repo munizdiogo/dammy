@@ -1,4 +1,5 @@
 import 'package:dammy/data/dammy_data.dart';
+import 'package:dammy/models/settings.dart';
 import 'package:dammy/screens/categories_meals_screen.dart';
 import 'package:dammy/screens/meal_detail_screen.dart';
 import 'package:dammy/screens/settings_screen.dart';
@@ -18,6 +19,18 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
 
   List<Meal> _availableMeals = DUMMY_MEALS;
+
+  void _filterMeals(Settings settings){
+    setState(() {
+      _availableMeals = DUMMY_MEALS.where((meal) {
+        final filterGluten = settings.isGlutenFree && !meal.isGlutenFree;
+        final filterLactose = settings.isGlutenFree && !meal.isLactoseFree;
+        final filterVegan = settings.isGlutenFree && !meal.isVegan;
+        final filterVegetarian = settings.isGlutenFree && !meal.isVegetarian;
+        return !filterGluten && !filterLactose && !filterVegan && !filterVegetarian;
+      }).toList();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +53,7 @@ class _MyAppState extends State<MyApp> {
         AppRoutes.HOME: (ctx) => TabsScreen(),
         AppRoutes.CATEGORIES_MEALS: (ctx) => CategoriesMealsScreen(_availableMeals),
         AppRoutes.MEAL_DETAIL: (ctx) => MealDetailScreen(),
-        AppRoutes.SETTINGS: (ctx) => SettingsScreen(),
+        AppRoutes.SETTINGS: (ctx) => SettingsScreen(_filterMeals),
       },
       // METODO PARA DEFINIR UMA ROTA QUANDO TENTAR ACESSAR UMA ROTA INEXISTENTE.
       // EX.: PÁGINA DE 404. SCREEN NÃO ENCONTRADA

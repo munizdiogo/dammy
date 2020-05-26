@@ -3,6 +3,11 @@ import 'package:dammy/models/settings.dart';
 import 'package:flutter/material.dart';
 
 class SettingsScreen extends StatefulWidget {
+
+  final Function(Settings) onSettingsChange;
+
+  const SettingsScreen(this.onSettingsChange);
+
   @override
   _SettingsScreenState createState() => _SettingsScreenState();
 }
@@ -15,13 +20,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
     String title,
     String subtitle,
     bool value,
-    Function onChange,
+    Function(bool) onChange,
   ) {
     return SwitchListTile.adaptive(
       title: Text(title),
       subtitle: Text(subtitle),
       value: value,
-      onChanged: onChange,
+      onChanged: (value) { 
+        onChange(value);
+        widget.onSettingsChange(settings);
+        },
     );
   }
 
