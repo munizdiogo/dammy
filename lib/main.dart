@@ -1,3 +1,4 @@
+import 'package:dammy/data/dammy_data.dart';
 import 'package:dammy/screens/categories_meals_screen.dart';
 import 'package:dammy/screens/meal_detail_screen.dart';
 import 'package:dammy/screens/settings_screen.dart';
@@ -5,9 +6,19 @@ import 'package:dammy/screens/tabs_screen.dart';
 import 'package:dammy/utils/app_routes.dart';
 import 'package:flutter/material.dart';
 
+import 'models/meal.dart';
+
 void main() => runApp(MyApp());
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+
+  List<Meal> _availableMeals = DUMMY_MEALS;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -17,6 +28,7 @@ class MyApp extends StatelessWidget {
         accentColor: Colors.amber,
         fontFamily: 'Raleway',
         canvasColor: Color.fromRGBO(255, 254, 229, 1),
+        brightness: Brightness.light,
         textTheme: ThemeData.light().textTheme.copyWith(
               headline1: TextStyle(
                 fontSize: 20,
@@ -26,7 +38,7 @@ class MyApp extends StatelessWidget {
       ),
       routes: {
         AppRoutes.HOME: (ctx) => TabsScreen(),
-        AppRoutes.CATEGORIES_MEALS: (ctx) => CategoriesMealsScreen(),
+        AppRoutes.CATEGORIES_MEALS: (ctx) => CategoriesMealsScreen(_availableMeals),
         AppRoutes.MEAL_DETAIL: (ctx) => MealDetailScreen(),
         AppRoutes.SETTINGS: (ctx) => SettingsScreen(),
       },
