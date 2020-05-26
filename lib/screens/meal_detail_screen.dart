@@ -81,6 +81,7 @@ class MealDetailScreen extends StatelessWidget {
           ],
         ),
       ),
+      
     );
   }
 }
