@@ -1,5 +1,4 @@
 import 'package:dammy/screens/categories_meals_screen.dart';
-import 'package:dammy/screens/category_screen.dart';
 import 'package:dammy/screens/meal_detail_screen.dart';
 import 'package:dammy/screens/settings_screen.dart';
 import 'package:dammy/screens/tabs_screen.dart';
