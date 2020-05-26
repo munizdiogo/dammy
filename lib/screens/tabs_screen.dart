@@ -1,3 +1,4 @@
+import 'package:dammy/components/main_drawer.dart';
 import 'package:dammy/screens/category_screen.dart';
 import 'package:dammy/screens/favorite_screen.dart';
 import 'package:flutter/material.dart';
@@ -28,6 +29,7 @@ class _TabsScreenState extends State<TabsScreen> {
         title: Text(_screens[_selectedScreenIndex]['title']),
         centerTitle: true,
       ),
+      drawer: MainDrawer(),
       body: _screens[_selectedScreenIndex]['screen'],
       bottomNavigationBar: BottomNavigationBar(
         onTap: _selectScreen,
