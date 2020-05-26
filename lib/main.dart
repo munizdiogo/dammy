@@ -1,6 +1,7 @@
 import 'package:dammy/screens/categories_meals_screen.dart';
 import 'package:dammy/screens/category_screen.dart';
 import 'package:dammy/screens/meal_detail_screen.dart';
+import 'package:dammy/screens/settings_screen.dart';
 import 'package:dammy/screens/tabs_screen.dart';
 import 'package:dammy/utils/app_routes.dart';
 import 'package:flutter/material.dart';
@@ -28,6 +29,7 @@ class MyApp extends StatelessWidget {
         AppRoutes.HOME: (ctx) => TabsScreen(),
         AppRoutes.CATEGORIES_MEALS: (ctx) => CategoriesMealsScreen(),
         AppRoutes.MEAL_DETAIL: (ctx) => MealDetailScreen(),
+        AppRoutes.SETTINGS: (ctx) => SettingsScreen(),
       },
       // METODO PARA DEFINIR UMA ROTA QUANDO TENTAR ACESSAR UMA ROTA INEXISTENTE.
       // EX.: PÁGINA DE 404. SCREEN NÃO ENCONTRADA
