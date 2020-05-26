@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
       routes: {
         AppRoutes.HOME: (ctx) => CategoryScreen(),
         AppRoutes.CATEGORIES_MEALS: (ctx) => CategoriesMealsScreen(),
-      //  AppRoutes.MEAL_DETAIL: (ctx) => MEalDetailScreen(),
+       AppRoutes.MEAL_DETAIL: (ctx) => MEalDetailScreen(),
       },
       // METODO PARA DEFINIR UMA ROTA QUANDO TENTAR ACESSAR UMA ROTA INEXISTENTE.
       // EX.: PÁGINA DE 404. SCREEN NÃO ENCONTRADA
