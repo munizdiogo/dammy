@@ -3,9 +3,9 @@ import 'package:dammy/screens/category_screen.dart';
 import 'package:dammy/screens/meal_detail_screen.dart';
 import 'package:dammy/utils/app_routes.dart';
 import 'package:flutter/material.dart';
- 
+
 void main() => runApp(MyApp());
- 
+
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -17,16 +17,16 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Raleway',
         canvasColor: Color.fromRGBO(255, 254, 229, 1),
         textTheme: ThemeData.light().textTheme.copyWith(
-          headline1: TextStyle(
-            fontSize: 20,
-            fontFamily: 'RobotoCondensed',
-          ),
-        ),
+              headline1: TextStyle(
+                fontSize: 20,
+                fontFamily: 'RobotoCondensed',
+              ),
+            ),
       ),
       routes: {
         AppRoutes.HOME: (ctx) => CategoryScreen(),
         AppRoutes.CATEGORIES_MEALS: (ctx) => CategoriesMealsScreen(),
-       AppRoutes.MEAL_DETAIL: (ctx) => MEalDetailScreen(),
+        AppRoutes.MEAL_DETAIL: (ctx) => MealDetailScreen(),
       },
       // METODO PARA DEFINIR UMA ROTA QUANDO TENTAR ACESSAR UMA ROTA INEXISTENTE.
       // EX.: PÁGINA DE 404. SCREEN NÃO ENCONTRADA
@@ -50,8 +50,6 @@ class MyApp extends StatelessWidget {
       //     }
       //   );
       // },
-
     );
   }
 }
- 

@@ -1,7 +1,30 @@
 import 'package:dammy/models/meal.dart';
 import 'package:flutter/material.dart';
 
-class MEalDetailScreen extends StatelessWidget {
+class MealDetailScreen extends StatelessWidget {
+  Widget _createSectionTitle(BuildContext context, String title) {
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 10),
+      child: Text(
+        title,
+        style: Theme.of(context).textTheme.headline1,
+      ),
+    );
+  }
+
+  Widget _createSectionContainer(Widget child) {
+    return Container(
+        width: 320,
+        height: 200,
+        padding: EdgeInsets.all(10),
+        margin: EdgeInsets.all(10),
+        decoration: BoxDecoration(
+            color: Colors.white,
+            border: Border.all(color: Colors.grey),
+            borderRadius: BorderRadius.circular(10)),
+        child: child);
+  }
+
   @override
   Widget build(BuildContext context) {
     final meal = ModalRoute.of(context).settings.arguments as Meal;
@@ -10,7 +33,7 @@ class MEalDetailScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(meal.title),
       ),
-      body: Center(
+      body: SingleChildScrollView(
         child: Column(
           children: [
             Container(
@@ -21,24 +44,9 @@ class MEalDetailScreen extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
             ),
-            Container(
-              margin: EdgeInsets.symmetric(vertical: 10),
-              child: Text(
-                'Ingredientes',
-                style: Theme.of(context).textTheme.headline1,
-              ),
-            ),
-            Container(
-              width: 300,
-              height: 200,
-              padding: EdgeInsets.all(10),
-              margin: EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                border: Border.all(color: Colors.grey),
-                borderRadius: BorderRadius.circular(10)
-                ),
-              child: ListView.builder(
+            _createSectionTitle(context, 'Ingredientes'),
+            _createSectionContainer(
+              ListView.builder(
                 itemCount: meal.ingredients.length,
                 itemBuilder: (ctx, index) {
                   return Padding(
@@ -52,6 +60,24 @@ class MEalDetailScreen extends StatelessWidget {
                 },
               ),
             ),
+            _createSectionTitle(context, 'Passos'),
+            _createSectionContainer(
+              ListView.builder(
+              itemCount: meal.steps.length,
+              itemBuilder: (ctx, index) {
+                return Column(
+                  children: <Widget>[
+                    ListTile(
+                      leading: CircleAvatar(
+                        child: Text('${index + 1}'),
+                      ),
+                      title: Text(meal.steps[index]),
+                    ),
+                    Divider()
+                  ],
+                );
+              },
+            )),
           ],
         ),
       ),
