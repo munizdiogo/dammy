@@ -11,6 +11,8 @@ import 'models/meal.dart';
 
 void main() => runApp(MyApp());
 
+// FIM DO CAPITULO 7 - NAVEGAÇÃO & MÚLTIPLAS TELAS
+
 class MyApp extends StatefulWidget {
   @override
   _MyAppState createState() => _MyAppState();
