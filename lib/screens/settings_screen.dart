@@ -4,9 +4,10 @@ import 'package:flutter/material.dart';
 
 class SettingsScreen extends StatefulWidget {
 
+  final Settings settings;
   final Function(Settings) onSettingsChange;
 
-  const SettingsScreen(this.onSettingsChange);
+  const SettingsScreen(this.settings, this.onSettingsChange);
 
   @override
   _SettingsScreenState createState() => _SettingsScreenState();
@@ -14,7 +15,13 @@ class SettingsScreen extends StatefulWidget {
 
 class _SettingsScreenState extends State<SettingsScreen> {
 
-  var settings = Settings();
+  Settings settings;
+
+  @override
+  void initState() {
+    super.initState();
+    settings = widget.settings;
+  }
 
   Widget _createSwitch(
     String title,

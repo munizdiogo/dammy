@@ -17,19 +17,37 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
+  Settings settings = Settings();
   List<Meal> _availableMeals = DUMMY_MEALS;
+  List<Meal> _favoriteMeals = [];
 
-  void _filterMeals(Settings settings){
+  void _filterMeals(Settings settings) {
     setState(() {
+      this.settings = settings;
+
       _availableMeals = DUMMY_MEALS.where((meal) {
         final filterGluten = settings.isGlutenFree && !meal.isGlutenFree;
         final filterLactose = settings.isGlutenFree && !meal.isLactoseFree;
         final filterVegan = settings.isGlutenFree && !meal.isVegan;
         final filterVegetarian = settings.isGlutenFree && !meal.isVegetarian;
-        return !filterGluten && !filterLactose && !filterVegan && !filterVegetarian;
+        return !filterGluten &&
+            !filterLactose &&
+            !filterVegan &&
+            !filterVegetarian;
       }).toList();
     });
+  }
+
+  void _toogleFavorite(Meal meal) {
+    setState(() {
+      _favoriteMeals.contains(meal)
+          ? _favoriteMeals.remove(meal)
+          : _favoriteMeals.add(meal);
+    });
+  }
+
+  bool _isFavorite(Meal meal) {
+    return _favoriteMeals.contains(meal);
   }
 
   @override
@@ -50,33 +68,12 @@ class _MyAppState extends State<MyApp> {
             ),
       ),
       routes: {
-        AppRoutes.HOME: (ctx) => TabsScreen(),
-        AppRoutes.CATEGORIES_MEALS: (ctx) => CategoriesMealsScreen(_availableMeals),
-        AppRoutes.MEAL_DETAIL: (ctx) => MealDetailScreen(),
-        AppRoutes.SETTINGS: (ctx) => SettingsScreen(_filterMeals),
+        AppRoutes.HOME: (ctx) => TabsScreen(_favoriteMeals),
+        AppRoutes.CATEGORIES_MEALS: (ctx) =>
+            CategoriesMealsScreen(_availableMeals),
+        AppRoutes.MEAL_DETAIL: (ctx) => MealDetailScreen(_toogleFavorite, _isFavorite),
+        AppRoutes.SETTINGS: (ctx) => SettingsScreen(settings, _filterMeals),
       },
-      // METODO PARA DEFINIR UMA ROTA QUANDO TENTAR ACESSAR UMA ROTA INEXISTENTE.
-      // EX.: PÁGINA DE 404. SCREEN NÃO ENCONTRADA
-      // onGenerateRoute: (settings) {
-      //   if(settings.name == '/alguma-coisa'){
-      //     return null;
-      //   } else if (settings == 'outra-coisa') {
-      //     return null;
-      //   } else {
-      //     return MaterialPageRoute(builder: (_){
-      //       return CategoryScreen();
-      //     });
-      //   }
-      // },
-      // METODO PARA DEFINIR UMA ROTA QUANDO UMA ROTA NÃO EXISTIR. SERÁ EXECUTADO APÓS O onGenerateRoute
-      // // EX.: PÁGINA DE 404. SCREEN NÃO ENCONTRADA
-      // onUnknownRoute: (settings){
-      //   return MaterialPageRoute(
-      //     builder: (_){
-      //       return CategoryScreen();
-      //     }
-      //   );
-      // },
     );
   }
 }
